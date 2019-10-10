@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "//romanborodatov.github.io/project6-react/static/css/main.d9c47734.chunk.css",
-    "main.js": "//romanborodatov.github.io/project6-react/static/js/main.5470e9d3.chunk.js",
-    "main.js.map": "//romanborodatov.github.io/project6-react/static/js/main.5470e9d3.chunk.js.map",
-    "runtime-main.js": "//romanborodatov.github.io/project6-react/static/js/runtime-main.fa2571bc.js",
-    "runtime-main.js.map": "//romanborodatov.github.io/project6-react/static/js/runtime-main.fa2571bc.js.map",
-    "static/css/2.e71d8db5.chunk.css": "//romanborodatov.github.io/project6-react/static/css/2.e71d8db5.chunk.css",
-    "static/js/2.e15501d7.chunk.js": "//romanborodatov.github.io/project6-react/static/js/2.e15501d7.chunk.js",
-    "static/js/2.e15501d7.chunk.js.map": "//romanborodatov.github.io/project6-react/static/js/2.e15501d7.chunk.js.map",
-    "index.html": "//romanborodatov.github.io/project6-react/index.html",
-    "precache-manifest.5e357968b5c70f008f19b40b2e7ac901.js": "//romanborodatov.github.io/project6-react/precache-manifest.5e357968b5c70f008f19b40b2e7ac901.js",
-    "service-worker.js": "//romanborodatov.github.io/project6-react/service-worker.js",
-    "static/css/2.e71d8db5.chunk.css.map": "//romanborodatov.github.io/project6-react/static/css/2.e71d8db5.chunk.css.map",
-    "static/css/main.d9c47734.chunk.css.map": "//romanborodatov.github.io/project6-react/static/css/main.d9c47734.chunk.css.map"
+    "main.css": "/project6-react/static/css/main.d9c47734.chunk.css",
+    "main.js": "/project6-react/static/js/main.5346147f.chunk.js",
+    "main.js.map": "/project6-react/static/js/main.5346147f.chunk.js.map",
+    "runtime-main.js": "/project6-react/static/js/runtime-main.b78742ac.js",
+    "runtime-main.js.map": "/project6-react/static/js/runtime-main.b78742ac.js.map",
+    "static/css/2.e71d8db5.chunk.css": "/project6-react/static/css/2.e71d8db5.chunk.css",
+    "static/js/2.14ad9ae3.chunk.js": "/project6-react/static/js/2.14ad9ae3.chunk.js",
+    "static/js/2.14ad9ae3.chunk.js.map": "/project6-react/static/js/2.14ad9ae3.chunk.js.map",
+    "index.html": "/project6-react/index.html",
+    "precache-manifest.195948581b37779ecdd2174a47319998.js": "/project6-react/precache-manifest.195948581b37779ecdd2174a47319998.js",
+    "service-worker.js": "/project6-react/service-worker.js",
+    "static/css/2.e71d8db5.chunk.css.map": "/project6-react/static/css/2.e71d8db5.chunk.css.map",
+    "static/css/main.d9c47734.chunk.css.map": "/project6-react/static/css/main.d9c47734.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.fa2571bc.js",
+    "static/js/runtime-main.b78742ac.js",
     "static/css/2.e71d8db5.chunk.css",
-    "static/js/2.e15501d7.chunk.js",
+    "static/js/2.14ad9ae3.chunk.js",
     "static/css/main.d9c47734.chunk.css",
-    "static/js/main.5470e9d3.chunk.js"
+    "static/js/main.5346147f.chunk.js"
   ]
 }
