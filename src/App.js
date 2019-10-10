@@ -48,7 +48,7 @@ export default class App extends Component {
     this.getProblemTypes();
   }
 
-  getProblemTypes() {
+  getProblemTypes = () => {
     fetch("https://neolabs-api.zpoken.ai/problems/types", {
       method: "GET",
       headers: {
@@ -67,9 +67,9 @@ export default class App extends Component {
           problemOptions: options
         });
       });
-  }
+  };
 
-  getMapPoints() {
+  getMapPoints = () => {
     fetch("https://neolabs-api.zpoken.ai/problems", {
       method: "GET",
       headers: {
@@ -78,15 +78,13 @@ export default class App extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        const locations = Immutable.fromJS(
-          res.map(c => [c.geometry.coordinates[1], c.geometry.coordinates[0]])
-        );
+        // const locations = Immutable.fromJS(res);
         this.setState({
-          points: locations,
+          points: res,
           loadingPoints: false
         });
       });
-  }
+  };
 
   toggleReport = () => {
     console.log("togle");
@@ -104,6 +102,7 @@ export default class App extends Component {
           active={this.state.reportOpened}
           options={this.state.problemOptions}
           handleClose={this.toggleReport}
+          getMapPoints={this.getMapPoints}
         />
       </div>
     );

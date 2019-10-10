@@ -58,6 +58,7 @@ export default class Report extends Component {
         this.setState({
           locating: false
         });
+        this.props.getMapPoints();
         this.props.handleClose();
       });
   };
