@@ -9,7 +9,12 @@ export default class ReportIssue extends Component {
         onClick={this.props.clickHandler}
         style={{ backgroundColor: this.props.color }}
       >
-        <span>+</span>
+        {
+          this.props.filterIcon ?
+          <span>&#x25BC;</span>
+          :
+          <span>+</span>
+        }
       </div>
     );
   }

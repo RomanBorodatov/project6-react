@@ -38,15 +38,17 @@ const mapStyle = fromJS({
 export default class App extends Component {
   state = {
     reportOpened: false,
+    filterOpened: false,
     problemOptions: [],
     positiveOptions: [],
+    filterOptions: [],
     loadingPoints: true,
     points: [],
     reportProblem: "bad"
   };
 
   componentDidMount() {
-    this.getMapPoints();
+    this.getMapPoints(-1);
     this.getProblemTypes();
   }
 
@@ -62,14 +64,17 @@ export default class App extends Component {
         console.log(res);
         const problemOptions = res.filter(item => item.positive === false);
         const positiveOptions = res.filter(item => item.positive === true);
+        const filterOptions = [{"id": -1, "text": "Все"}, ...res];
+
         this.setState({
           problemOptions: problemOptions,
-          positiveOptions: positiveOptions
+          positiveOptions: positiveOptions,
+          filterOptions: filterOptions
         });
       });
   };
 
-  getMapPoints = () => {
+  getMapPoints = filter => {
     fetch("https://neolabs-api.zpoken.ai/problems", {
       method: "GET",
       headers: {
@@ -78,9 +83,17 @@ export default class App extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        // const locations = Immutable.fromJS(res);
+        console.log("filter", filter);
+        let resPoints = [];
+
+        if (filter === -1){
+          resPoints = res;
+        }else{
+          resPoints = res.filter(point => point.typeId === filter)
+        }
+
         this.setState({
-          points: res,
+          points: resPoints,
           loadingPoints: false
         });
       });
@@ -94,6 +107,13 @@ export default class App extends Component {
     });
   };
 
+  toggleFilter = () => {
+    console.log("toggleFilter");
+    this.setState({
+      filterOpened: !this.state.filterOpened
+    });
+  }
+
   render() {
     return this.state.loadingPoints ? null : (
       <div className="App">
@@ -105,24 +125,45 @@ export default class App extends Component {
         />
         <ReportIssue
           clickHandler={() => this.toggleReport("bad")}
-          color="#ff9800"
+          color="red"
           position="right"
         />
-        {this.state.reportProblem === "bad" ? (
+        <ReportIssue
+          clickHandler={() => this.toggleFilter()}
+          color="#ff9800"
+          position="top"
+          filterIcon={true}
+        />
+        {this.state.filterOpened ? 
           <Report
-            active={this.state.reportOpened}
-            options={this.state.problemOptions}
-            handleClose={this.toggleReport}
+            active={this.state.filterOpened}
+            options={this.state.filterOptions}
+            handleClose={this.toggleFilter}
             getMapPoints={this.getMapPoints}
+            isFilter={true}
+            text={"Фильтр"}
           />
-        ) : (
-          <Report
-            active={this.state.reportOpened}
-            options={this.state.positiveOptions}
-            handleClose={this.toggleReport}
-            getMapPoints={this.getMapPoints}
-          />
-        )}
+        :
+          this.state.reportProblem === "bad" ? (
+            <Report
+              active={this.state.reportOpened}
+              options={this.state.problemOptions}
+              handleClose={this.toggleReport}
+              getMapPoints={this.getMapPoints}
+              isFilter={false}
+              text={"Отметить проблему"}
+            />
+          ) : (
+            <Report
+              active={this.state.reportOpened}
+              options={this.state.positiveOptions}
+              handleClose={this.toggleReport}
+              getMapPoints={this.getMapPoints}
+              isFilter={false}
+              text={"Отметить проблему"}
+            />
+          )
+        }
       </div>
     );
   }

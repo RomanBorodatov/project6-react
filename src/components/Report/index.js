@@ -58,12 +58,20 @@ export default class Report extends Component {
         this.setState({
           locating: false
         });
-        this.props.getMapPoints();
+        this.props.getMapPoints(-1);
         this.props.handleClose();
       });
   };
 
   handleSubmit = () => {
+    if (this.props.isFilter){
+      const problem = this.state.selectedProblemValue;
+      console.log("problem", problem);
+      this.props.getMapPoints(problem);
+      this.props.handleClose();
+      return
+    }
+
     if (!navigator.geolocation) {
       this.setState({
         error: "Geolocation is not supported by your browser"
@@ -92,6 +100,7 @@ export default class Report extends Component {
         <div className="close-button" onClick={this.props.handleClose}>
           <span>x</span>
         </div>
+        <h3>{this.props.text}</h3>
         <Select
           styles={customStyles}
           options={this.getOptions()}
@@ -102,7 +111,7 @@ export default class Report extends Component {
           onClick={this.handleSubmit}
           disabled={!this.state.selectedProblemValue}
         >
-          <span>Отправить</span>
+          <span>{this.props.isFilter ? "Фильтровать" : "Отправить"}</span>
         </button>
       </div>
     );
