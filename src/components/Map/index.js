@@ -28,7 +28,11 @@ export default class Map extends Component {
         latitude={point.coordinates[0]}
         longitude={point.coordinates[1]}
       >
-        <MarkerComponent size={20} onClick={() => this.markerClick(point)} />
+        <MarkerComponent
+          size={20}
+          positive={point.positive}
+          onClick={() => this.markerClick(point)}
+        />
       </Marker>
     );
   };

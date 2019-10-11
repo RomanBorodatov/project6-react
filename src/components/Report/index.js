@@ -76,6 +76,16 @@ export default class Report extends Component {
     }
   };
 
+  getOptions = () => {
+    const options = this.props.options.map(option => {
+      return {
+        value: option.id,
+        label: option.text
+      };
+    });
+    return options;
+  };
+
   render() {
     return (
       <div className={`report ${this.props.active ? "active" : ""}`}>
@@ -84,7 +94,7 @@ export default class Report extends Component {
         </div>
         <Select
           styles={customStyles}
-          options={this.props.options}
+          options={this.getOptions()}
           onChange={this.handleSelect}
         />
         <button

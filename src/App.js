@@ -39,8 +39,10 @@ export default class App extends Component {
   state = {
     reportOpened: false,
     problemOptions: [],
+    positiveOptions: [],
     loadingPoints: true,
-    points: []
+    points: [],
+    reportProblem: "bad"
   };
 
   componentDidMount() {
@@ -57,14 +59,12 @@ export default class App extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        const options = res.map(item => {
-          return {
-            value: item.id,
-            label: item.text
-          };
-        });
+        console.log(res);
+        const problemOptions = res.filter(item => item.positive === false);
+        const positiveOptions = res.filter(item => item.positive === true);
         this.setState({
-          problemOptions: options
+          problemOptions: problemOptions,
+          positiveOptions: positiveOptions
         });
       });
   };
@@ -86,10 +86,11 @@ export default class App extends Component {
       });
   };
 
-  toggleReport = () => {
+  toggleReport = type => {
     console.log("togle");
     this.setState({
-      reportOpened: !this.state.reportOpened
+      reportOpened: !this.state.reportOpened,
+      reportProblem: type
     });
   };
 
@@ -97,13 +98,31 @@ export default class App extends Component {
     return this.state.loadingPoints ? null : (
       <div className="App">
         <Map points={this.state.points} mapStyle={mapStyle} />
-        <ReportIssue clickHandler={this.toggleReport} />
-        <Report
-          active={this.state.reportOpened}
-          options={this.state.problemOptions}
-          handleClose={this.toggleReport}
-          getMapPoints={this.getMapPoints}
+        <ReportIssue
+          clickHandler={() => this.toggleReport("good")}
+          color="green"
+          position="left"
         />
+        <ReportIssue
+          clickHandler={() => this.toggleReport("bad")}
+          color="#ff9800"
+          position="right"
+        />
+        {this.state.reportProblem === "bad" ? (
+          <Report
+            active={this.state.reportOpened}
+            options={this.state.problemOptions}
+            handleClose={this.toggleReport}
+            getMapPoints={this.getMapPoints}
+          />
+        ) : (
+          <Report
+            active={this.state.reportOpened}
+            options={this.state.positiveOptions}
+            handleClose={this.toggleReport}
+            getMapPoints={this.getMapPoints}
+          />
+        )}
       </div>
     );
   }
